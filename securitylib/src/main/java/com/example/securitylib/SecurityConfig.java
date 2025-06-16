@@ -4,10 +4,12 @@ public class SecurityConfig {
 
     private boolean blockScreenshots;
     private boolean blockCopyPaste;
+    private boolean blockRecentAppsPreview;
 
-    public SecurityConfig(boolean blockScreenshots, boolean blockCopyPaste) {
+    public SecurityConfig(boolean blockScreenshots, boolean blockCopyPaste, boolean blockRecentAppsPreview) {
         this.blockScreenshots = blockScreenshots;
         this.blockCopyPaste = blockCopyPaste;
+        this.blockRecentAppsPreview = blockRecentAppsPreview;
     }
 
     public boolean isBlockScreenshots() {
@@ -18,10 +20,14 @@ public class SecurityConfig {
         return blockCopyPaste;
     }
 
-    // Builder pattern pour rendre l'utilisation simple et propre
+    public boolean isBlockRecentAppsPreview() {
+        return blockRecentAppsPreview;
+    }
+
     public static class Builder {
         private boolean blockScreenshots = true;
         private boolean blockCopyPaste = true;
+        private boolean blockRecentAppsPreview = true;
 
         public Builder disableScreenshots(boolean value) {
             this.blockScreenshots = value;
@@ -33,8 +39,13 @@ public class SecurityConfig {
             return this;
         }
 
+        public Builder disableRecentAppsPreview(boolean value) {
+            this.blockRecentAppsPreview = value;
+            return this;
+        }
+
         public SecurityConfig build() {
-            return new SecurityConfig(blockScreenshots, blockCopyPaste);
+            return new SecurityConfig(blockScreenshots, blockCopyPaste, blockRecentAppsPreview);
         }
     }
 }

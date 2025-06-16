@@ -19,10 +19,10 @@ import android.widget.EditText;
 
 public class SecurityUtils {
 
-    // Nouvelle méthode principale configurable
+    // Applique la configuration choisie
     public static void applySecurity(Activity activity, SecurityConfig config) {
-        if (config.isBlockScreenshots()) {
-            disableScreenshots(activity);
+        if (config.isBlockScreenshots() || config.isBlockRecentAppsPreview()) {
+            applyWindowSecurityFlags(activity, config);
         }
         if (config.isBlockCopyPaste()) {
             disableCopyPasteForAllEditTexts(activity);
@@ -30,9 +30,15 @@ public class SecurityUtils {
         }
     }
 
-    public static void disableScreenshots(Activity activity) {
-        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
+    // Applique FLAG_SECURE selon la configuration
+    private static void applyWindowSecurityFlags(Activity activity, SecurityConfig config) {
+        int flags = 0;
+
+        if (config.isBlockScreenshots() || config.isBlockRecentAppsPreview()) {
+            flags |= WindowManager.LayoutParams.FLAG_SECURE;
+        }
+
+        activity.getWindow().setFlags(flags, flags);
     }
 
     public static void disableCopyPasteForAllEditTexts(Activity activity) {
