@@ -19,26 +19,27 @@ import android.widget.EditText;
 
 public class SecurityUtils {
 
-    // Active toute la sécurité d'un coup
-    public static void enableFullSecurity(Activity activity) {
-        disableScreenshots(activity);
-        disableCopyPasteForAllEditTexts(activity);
-        clearClipboard(activity);
+    // Nouvelle méthode principale configurable
+    public static void applySecurity(Activity activity, SecurityConfig config) {
+        if (config.isBlockScreenshots()) {
+            disableScreenshots(activity);
+        }
+        if (config.isBlockCopyPaste()) {
+            disableCopyPasteForAllEditTexts(activity);
+            clearClipboard(activity);
+        }
     }
 
-    // Bloque les screenshots
     public static void disableScreenshots(Activity activity) {
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
     }
 
-    // Applique la protection sur tous les EditText de l'activité
     public static void disableCopyPasteForAllEditTexts(Activity activity) {
         View rootView = activity.getWindow().getDecorView().getRootView();
         disableCopyPasteRecursive(rootView);
     }
 
-    // Recherche récursive de tous les EditText
     private static void disableCopyPasteRecursive(View view) {
         if (view instanceof EditText) {
             disableCopyPaste((EditText) view);
@@ -49,7 +50,6 @@ public class SecurityUtils {
         }
     }
 
-    // Bloque le copier-coller sur un EditText donné
     public static void disableCopyPaste(EditText editText) {
         editText.setLongClickable(false);
         editText.setTextIsSelectable(false);
@@ -73,7 +73,6 @@ public class SecurityUtils {
         });
     }
 
-    // Vide le presse-papier global de façon sécurisée
     public static void clearClipboard(Context context) {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboard != null) {
