@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "838187775001",
+    "firebase_url": "https://javascreenlibrairy-default-rtdb.firebaseio.com",
+    "project_id": "javascreenlibrairy",
+    "storage_bucket": "javascreenlibrairy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838187775001:android:b0c430b4406bd279bde688",
+        "android_client_info": {
+          "package_name": "com.example.javascreenlibrairy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTMt24CeUqUV7pFO9IjnxBi6mVgBQ3lFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
