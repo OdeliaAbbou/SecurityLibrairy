@@ -17,6 +17,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import android.app.ActivityManager;
+
+import java.util.List;
+
+
 public class SecurityUtils {
 
     // Applique la configuration choisie
@@ -90,4 +95,9 @@ public class SecurityUtils {
             Log.d("SecurityUtils", "Clipboard vidé");
         }
     }
+
+
+
+
+
 }

@@ -2,6 +2,8 @@ package com.example.javascreenlibrairy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.securitylib.SecuritySwitchDetector;
 import com.example.securitylib.SecurityUtils;
 import com.example.securitylib.SecurityConfig;
 
@@ -21,4 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
         SecurityUtils.applySecurity(this, config);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        SecuritySwitchDetector.register(this);
+    }
+
 }
