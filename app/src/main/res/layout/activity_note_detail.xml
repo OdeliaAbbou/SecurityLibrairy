@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/detailTitle"
-            android:text="Titre"
+            android:text="Title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#212121"
@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/detailContent"
-            android:text="Contenu de la note ici..."
+            android:text="Content of the note..."
             android:textSize="16sp"
             android:textColor="#424242"
             android:lineSpacingExtra="4dp"

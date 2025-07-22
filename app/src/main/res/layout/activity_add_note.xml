@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Titre -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -22,10 +21,9 @@
                 android:id="@+id/editTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Titre de la note" />
+                android:hint="Title of the note" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Contenu -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -37,17 +35,16 @@
                 android:id="@+id/editContent"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:hint="Contenu"
+                android:hint="Contents"
                 android:gravity="top"
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Bouton enregistrer -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSaveNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enregistrer la note"
+            android:text="Save note"
             app:cornerRadius="8dp" />
     </LinearLayout>
 </ScrollView>

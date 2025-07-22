@@ -24,7 +24,6 @@ import java.util.List;
 
 public class SecurityUtils {
 
-    // Applique la configuration choisie
     public static void applySecurity(Activity activity, SecurityConfig config) {
         if (config.isBlockScreenshots() || config.isBlockRecentAppsPreview()) {
             applyWindowSecurityFlags(activity, config);
@@ -35,7 +34,6 @@ public class SecurityUtils {
         }
     }
 
-    // Applique FLAG_SECURE selon la configuration
     private static void applyWindowSecurityFlags(Activity activity, SecurityConfig config) {
         int flags = 0;
 
@@ -92,7 +90,7 @@ public class SecurityUtils {
             } else {
                 clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
             }
-            Log.d("SecurityUtils", "Clipboard vidé");
+            Log.d("SecurityUtils", "Empty clipboard");
         }
     }
 
