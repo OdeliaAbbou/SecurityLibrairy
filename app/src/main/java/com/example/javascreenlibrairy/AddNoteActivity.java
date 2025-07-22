@@ -59,6 +59,8 @@ public class AddNoteActivity extends AppCompatActivity {
         });
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
