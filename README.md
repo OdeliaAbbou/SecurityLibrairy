@@ -27,11 +27,8 @@ This project includes a **modular and reusable security library** called "securi
 
 ### 🔐 Key Features
 
-✅ **Disable screenshots**  
-Blocks screenshots and screen recording with "FLAG_SECURE".
-
-✅ **Block preview in recent apps**  
-Hides your app content in the Android recent tasks list.
+✅ **Disable screenshots and preview in recent apps**
+Blocks screenshots, screen recording, and hides your app from the recent apps screen using `FLAG_SECURE`.
 
 ✅ **Disable copy/paste**  
 Removes all interaction with text fields:
@@ -52,15 +49,7 @@ private static final long TIME_WINDOW_MS = 60 * 1000;
 🎛️ Configure per Activity
 Each activity can define its own protection level with SecurityConfig:
 
-public class MyActivity extends BaseSecureActivity {
-    @Override
-    protected SecurityConfig provideSecurityConfig() {
-        return new SecurityConfig.Builder()
-            .disableScreenshotsAndRecentApps(false)     // allow screenshots and preview in recents
-            .disableCopyPaste(true)                    // disable copy/paste
-            .build();
-    }
-}
+<pre> ```java public class MyActivity extends BaseSecureActivity { @Override protected SecurityConfig provideSecurityConfig() { return new SecurityConfig.Builder() .disableScreenshotsAndRecentApps(false) // allow screenshots and preview in recents .disableCopyPaste(true) // disable copy/paste .build(); } } ``` </pre>
 
 
 🚀 Getting Started
