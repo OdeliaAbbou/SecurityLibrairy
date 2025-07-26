@@ -44,7 +44,7 @@ public class AddNoteActivity extends BaseSecureActivity {
             String content = editContent.getText().toString().trim();
 
             if (title.isEmpty() || content.isEmpty()) {
-                Toast.makeText(this, "Veuillez remplir le titre et le contenu.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please fill in the title and content.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
