@@ -49,8 +49,11 @@ private static final long TIME_WINDOW_MS = 60 * 1000;
 🎛️ Configure per Activity
 Each activity can define its own protection level with SecurityConfig:
 
-<pre> ```java public class MyActivity extends BaseSecureActivity { @Override protected SecurityConfig provideSecurityConfig() { return new SecurityConfig.Builder() .disableScreenshotsAndRecentApps(false) // allow screenshots and preview in recents .disableCopyPaste(true) // disable copy/paste .build(); } } ``` </pre>
-
+<pre> ```java public class MyActivity extends BaseSecureActivity {
+ @Override protected SecurityConfig provideSecurityConfig() { 
+  return new SecurityConfig.Builder() .disableScreenshotsAndRecentApps(false) // allow screenshots and preview in recents .disableCopyPaste(true) // disable copy/paste      
+    .build(); }
+ } ``` </pre>
 
 🚀 Getting Started
 Prerequisites
