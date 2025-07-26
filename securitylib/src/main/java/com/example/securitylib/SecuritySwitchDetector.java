@@ -1,3 +1,4 @@
+
 package com.example.securitylib;
 
 import android.app.Activity;
@@ -15,9 +16,11 @@ public class SecuritySwitchDetector {
     private static final String KEY_COUNT = "switchCount";
     private static final String KEY_LAST_TS = "lastSwitchTimestamp";
     private static final String KEY_FIRST_LAUNCH_DONE = "firstLaunchDone";
+    private static final String KEY_VERSION = "detectorVersion";
 
+    private static final int CURRENT_VERSION = 2;
     private static final int SWITCH_THRESHOLD = 4;
-    private static final long TIME_WINDOW_MS = 60 * 1000; // 1 minute
+    private static final long TIME_WINDOW_MS = 60 * 1000;
 
     private static boolean isAppInForeground = true;
     private static int activeActivitiesCount = 0;
@@ -28,6 +31,22 @@ public class SecuritySwitchDetector {
         activeActivitiesCount++;
 
         SharedPreferences prefs = activity.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        int savedVersion = prefs.getInt(KEY_VERSION, 1);
+
+        if (savedVersion < CURRENT_VERSION) {
+            Log.d("SwitchDetector", "New version detected (" + savedVersion + " -> " + CURRENT_VERSION + ") - resetting all data");
+            prefs.edit().clear()
+                    .putInt(KEY_VERSION, CURRENT_VERSION)
+                    .putBoolean(KEY_FIRST_LAUNCH_DONE, true)
+                    .putLong(KEY_LAST_TS, System.currentTimeMillis())
+                    .putInt(KEY_COUNT, 0)
+                    .apply();
+            isAppInForeground = true;
+            activeActivitiesCount = 1;
+            Log.d("SwitchDetector", "Version reset completed - fresh start");
+            return;
+        }
+
         boolean firstLaunchDone = prefs.getBoolean(KEY_FIRST_LAUNCH_DONE, false);
 
         if (backgroundCheckRunnable != null) {
@@ -133,7 +152,9 @@ public class SecuritySwitchDetector {
 
     public static void reset(Activity activity) {
         SharedPreferences prefs = activity.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        prefs.edit().clear().apply();
+        prefs.edit().clear()
+                .putInt(KEY_VERSION, CURRENT_VERSION)
+                .apply();
         isAppInForeground = true;
         activeActivitiesCount = 0;
         if (backgroundCheckRunnable != null) {
@@ -147,9 +168,11 @@ public class SecuritySwitchDetector {
         SharedPreferences prefs = activity.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         int count = prefs.getInt(KEY_COUNT, 0);
         long lastTs = prefs.getLong(KEY_LAST_TS, 0);
+        int version = prefs.getInt(KEY_VERSION, 1);
 
         Log.d("SwitchDetector", "Stats: count=" + count +
                 ", lastTs=" + lastTs +
+                ", version=" + version +
                 ", isAppInForeground=" + isAppInForeground +
                 ", activeActivities=" + activeActivitiesCount);
     }

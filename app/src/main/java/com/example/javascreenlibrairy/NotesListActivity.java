@@ -23,9 +23,8 @@ public class NotesListActivity extends BaseSecureActivity{
     @Override
     protected SecurityConfig provideSecurityConfig() {
         return new SecurityConfig.Builder()
-                .disableScreenshots(true)
+                .disableScreenshotsAndRecentApps(true)
                 .disableCopyPaste(true)
-                .disableRecentAppsPreview(true)
                 .build();
     }
     @Override

@@ -24,9 +24,8 @@ public class AddNoteActivity extends BaseSecureActivity {
     @Override
     protected SecurityConfig provideSecurityConfig() {
         return new SecurityConfig.Builder()
-                .disableScreenshots(false)
+                .disableScreenshotsAndRecentApps(false)
                 .disableCopyPaste(true)
-                .disableRecentAppsPreview(false)
                 .build();
     }
 

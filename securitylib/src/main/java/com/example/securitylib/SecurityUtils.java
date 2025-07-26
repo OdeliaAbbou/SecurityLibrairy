@@ -17,31 +17,29 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import android.app.ActivityManager;
-
-import java.util.List;
-
-
 public class SecurityUtils {
 
     public static void applySecurity(Activity activity, SecurityConfig config) {
-        if (config.isBlockScreenshots() || config.isBlockRecentAppsPreview()) {
-            applyWindowSecurityFlags(activity, config);
+        if (config.isBlockScreenshotsAndRecentApps()) {
+            applyWindowSecurityFlags(activity);
+        } else {
+            clearWindowSecurityFlags(activity);
         }
+
         if (config.isBlockCopyPaste()) {
             disableCopyPasteForAllEditTexts(activity);
             clearClipboard(activity);
         }
     }
 
-    private static void applyWindowSecurityFlags(Activity activity, SecurityConfig config) {
-        int flags = 0;
+    private static void applyWindowSecurityFlags(Activity activity) {
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        Log.d("SecurityUtils", "FLAG_SECURE enabled - Screenshots and recent apps blocked");
+    }
 
-        if (config.isBlockScreenshots() || config.isBlockRecentAppsPreview()) {
-            flags |= WindowManager.LayoutParams.FLAG_SECURE;
-        }
-
-        activity.getWindow().setFlags(flags, flags);
+    private static void clearWindowSecurityFlags(Activity activity) {
+        activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        Log.d("SecurityUtils", "FLAG_SECURE disabled - Screenshots and Recent Apps allowed");
     }
 
     public static void disableCopyPasteForAllEditTexts(Activity activity) {
@@ -90,12 +88,7 @@ public class SecurityUtils {
             } else {
                 clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
             }
-            Log.d("SecurityUtils", "Empty clipboard");
+            Log.d("SecurityUtils", "Clipboard emptied");
         }
     }
-
-
-
-
-
 }

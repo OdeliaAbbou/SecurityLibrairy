@@ -2,35 +2,28 @@ package com.example.securitylib;
 
 public class SecurityConfig {
 
-    private boolean blockScreenshots;
+    private boolean blockScreenshotsAndRecentApps;
     private boolean blockCopyPaste;
-    private boolean blockRecentAppsPreview;
 
-    public SecurityConfig(boolean blockScreenshots, boolean blockCopyPaste, boolean blockRecentAppsPreview) {
-        this.blockScreenshots = blockScreenshots;
+    public SecurityConfig(boolean blockScreenshotsAndRecentApps, boolean blockCopyPaste) {
+        this.blockScreenshotsAndRecentApps = blockScreenshotsAndRecentApps;
         this.blockCopyPaste = blockCopyPaste;
-        this.blockRecentAppsPreview = blockRecentAppsPreview;
     }
 
-    public boolean isBlockScreenshots() {
-        return blockScreenshots;
+    public boolean isBlockScreenshotsAndRecentApps() {
+        return blockScreenshotsAndRecentApps;
     }
 
     public boolean isBlockCopyPaste() {
         return blockCopyPaste;
     }
 
-    public boolean isBlockRecentAppsPreview() {
-        return blockRecentAppsPreview;
-    }
-
     public static class Builder {
-        private boolean blockScreenshots = true;
+        private boolean blockScreenshotsAndRecentApps = true;
         private boolean blockCopyPaste = true;
-        private boolean blockRecentAppsPreview = true;
 
-        public Builder disableScreenshots(boolean value) {
-            this.blockScreenshots = value;
+        public Builder disableScreenshotsAndRecentApps(boolean value) {
+            this.blockScreenshotsAndRecentApps = value;
             return this;
         }
 
@@ -39,13 +32,8 @@ public class SecurityConfig {
             return this;
         }
 
-        public Builder disableRecentAppsPreview(boolean value) {
-            this.blockRecentAppsPreview = value;
-            return this;
-        }
-
         public SecurityConfig build() {
-            return new SecurityConfig(blockScreenshots, blockCopyPaste, blockRecentAppsPreview);
+            return new SecurityConfig(blockScreenshotsAndRecentApps, blockCopyPaste);
         }
     }
 }
