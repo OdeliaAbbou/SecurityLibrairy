@@ -7,16 +7,16 @@ This project includes a **modular and reusable security library** called "securi
 
 ## 📱 Screenshots
 
-| 📋 Notes List 
-<img width="302" height="509" alt="image" src="https://github.com/user-attachments/assets/fe48af8c-6986-4edf-90c6-d3e020ce266a" />
+### 📋 Notes List  
+<img width="200" src="https://github.com/user-attachments/assets/fe48af8c-6986-4edf-90c6-d3e020ce266a" />
 
 
-| 🔐 Secure Detail View 
-<img width="292" height="685" alt="image" src="https://github.com/user-attachments/assets/8851e793-ac55-47dd-8f88-30656884bfb5" />
+### 🔐 Secure Detail View  
+<img width="200" src="https://github.com/user-attachments/assets/8851e793-ac55-47dd-8f88-30656884bfb5" />
 
 
-| 🚨 Suspicious Behavior Alert 
-<img width="312" height="565" alt="image" src="https://github.com/user-attachments/assets/6123d5fa-b246-40d4-8cd1-c63f38a60d32" />
+### 🚨 Suspicious Behavior Alert  
+<img width="200" src="https://github.com/user-attachments/assets/6123d5fa-b246-40d4-8cd1-c63f38a60d32" />
 
 
 ---
