@@ -6,7 +6,6 @@ public class Note {
     private String content;
 
     public Note() {
-        // Nécessaire pour Firebase
     }
 
     public Note(String id, String title, String content) {

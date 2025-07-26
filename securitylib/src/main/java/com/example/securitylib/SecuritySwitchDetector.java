@@ -36,7 +36,7 @@ public class SecuritySwitchDetector {
         }
 
         if (!firstLaunchDone) {
-            Log.d("SwitchDetector", "⏳ First launch - initialisation");
+            Log.d("SwitchDetector", "First launch - initialisation");
             prefs.edit()
                     .putBoolean(KEY_FIRST_LAUNCH_DONE, true)
                     .putLong(KEY_LAST_TS, System.currentTimeMillis())
@@ -148,7 +148,7 @@ public class SecuritySwitchDetector {
         int count = prefs.getInt(KEY_COUNT, 0);
         long lastTs = prefs.getLong(KEY_LAST_TS, 0);
 
-        Log.d("SwitchDetector", "📊 Stats: count=" + count +
+        Log.d("SwitchDetector", "Stats: count=" + count +
                 ", lastTs=" + lastTs +
                 ", isAppInForeground=" + isAppInForeground +
                 ", activeActivities=" + activeActivitiesCount);

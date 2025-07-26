@@ -15,28 +15,25 @@ import com.example.securitylib.SecuritySwitchDetector;
 import com.example.securitylib.SecurityUtils;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AddNoteActivity extends AppCompatActivity {
+public class AddNoteActivity extends BaseSecureActivity {
 
     private EditText editTitle, editContent;
     private Button btnSave;
 
 
-
+    @Override
+    protected SecurityConfig provideSecurityConfig() {
+        return new SecurityConfig.Builder()
+                .disableScreenshots(false)
+                .disableCopyPaste(true)
+                .disableRecentAppsPreview(false)
+                .build();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-
-        // lib sécurité
-        SecurityConfig config = new SecurityConfig.Builder()
-                .disableScreenshots(false)
-                .disableCopyPaste(true)
-                .disableRecentAppsPreview(false)
-                .build();
-        SecurityUtils.applySecurity(this, config);
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE); //annule Screen + AppEnFond
-
 
         editTitle = findViewById(R.id.editTitle);
         editContent = findViewById(R.id.editContent);
@@ -59,21 +56,6 @@ public class AddNoteActivity extends AppCompatActivity {
         });
     }
 
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SecuritySwitchDetector.onAppResume(this);
-        Log.d(getClass().getSimpleName(), "🟢 Activity resumed");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SecuritySwitchDetector.onAppPause(this);
-        Log.d(getClass().getSimpleName(), "🟡 Activity paused");
-    }
 
 
 

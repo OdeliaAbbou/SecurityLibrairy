@@ -15,34 +15,32 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
-public class NotesListActivity extends AppCompatActivity {
+public class NotesListActivity extends BaseSecureActivity{
     private ListView listView;
     private NotesAdapter adapter;
     private ArrayList<Note> notes;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes_list);
-
-        // Sécurité (lib perso)
-        SecurityConfig config = new SecurityConfig.Builder()
+    protected SecurityConfig provideSecurityConfig() {
+        return new SecurityConfig.Builder()
                 .disableScreenshots(true)
                 .disableCopyPaste(true)
                 .disableRecentAppsPreview(true)
                 .build();
-        SecurityUtils.applySecurity(this, config);
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notes_list);
 
         listView = findViewById(R.id.notesListView);
         notes = new ArrayList<>();
         adapter = new NotesAdapter(this, notes);
         listView.setAdapter(adapter);
 
-        // Aller à la page d’ajout
         findViewById(R.id.btnAddNote).setOnClickListener(v ->
                 startActivity(new Intent(this, AddNoteActivity.class)));
 
-        // Chargement Firebase
         FirebaseDatabase.getInstance().getReference("notes")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -59,7 +57,6 @@ public class NotesListActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
 
-        // Clic sur une note → Détails
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Note clickedNote = notes.get(position);
             Intent intent = new Intent(this, NoteDetailActivity.class);
@@ -71,20 +68,6 @@ public class NotesListActivity extends AppCompatActivity {
 
 
 
-
-@Override
-protected void onResume() {
-    super.onResume();
-    SecuritySwitchDetector.onAppResume(this);
-    Log.d(getClass().getSimpleName(), "🟢 Activity resumed");
-}
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SecuritySwitchDetector.onAppPause(this);
-        Log.d(getClass().getSimpleName(), "🟡 Activity paused");
-    }
 
 
 }
